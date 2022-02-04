@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 60vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -38,6 +34,4 @@
   }
 }
 
-#search-bar {
-  width: 100%;
-}
+
