@@ -16,8 +16,7 @@ export default function SearchBar() {
       console.log(data)
       if (!("Note" in data)) {
         let results = data.bestMatches
-        console.log(results)
-        return results
+        setOptions(results)
       }
       else {
         console.log('Api Exceeded')
@@ -29,25 +28,27 @@ export default function SearchBar() {
   }
 
   useEffect(() => {
+    console.log('Effect Firing');
     let active: boolean = true;
 
     if (!loading) {
       return undefined;
     }
   
-  (async () => {
-    // await
+    (async () => {
+      if (active && search.length > 2) {
+        // TODO: Need to add debounce here to prevent multi-fetching
+        console.log('Active IF firing');
+        searchResults(search);
+      }
+      console.log(options)
+    })();
 
-    if (active) {
-      setOptions(searchResults(search));
-    }
-  })();
-
-  return () => {
-    active = false;
-  };
+    return () => {
+      active = false;
+    };
   
-  }, [loading]);
+  }, [loading, search, options]);
 
 
 
@@ -57,8 +58,16 @@ export default function SearchBar() {
       freeSolo
       id="search-bar"
       sx={{ maxWidth: "70vw", minWidth: "25vw", }}
-      options={stockOptions}
+      options={options.map((option: { [x: string]: any; }) => option["2. name"])}
       value={search}
+      open={open}
+      loading={loading}
+      onOpen={() => {
+        setOpen(true);
+      }}
+      onClose={() => {
+        setOpen(false);
+      }}
       disableClearable
       onInputChange={(event: any, newValue: string) => {
         setSearch(newValue)
