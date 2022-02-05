@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { TextField, Autocomplete } from '@mui/material'
 import { APIKey } from '../api'
 
-export default function SearchBar() {
+export default function SearchBar({input}) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<any>([]);
   const [search, setSearch] = useState("");
   const loading = open && options.length === 0;
-  const stockOptions = ["empty", "array"]
 
   let searchResults = function(input: string) {
     fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${input}&apikey=${APIKey}`)
@@ -38,8 +37,7 @@ export default function SearchBar() {
     (async () => {
       if (active && search.length > 2) {
         // TODO: Need to add debounce here to prevent multi-fetching
-        console.log('Active IF firing');
-        searchResults(search);
+        // searchResults(search);
       }
       console.log(options)
     })();
@@ -67,6 +65,7 @@ export default function SearchBar() {
       }}
       onClose={() => {
         setOpen(false);
+        input(search);
       }}
       disableClearable
       onInputChange={(event: any, newValue: string) => {

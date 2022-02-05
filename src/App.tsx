@@ -1,13 +1,19 @@
-import React from 'react';
+import { useState } from 'react';
+
 import './App.css';
 import SearchBar from './Components/SearchBar'
-// import SearchBar from './Components/SearchDemo'
+import OverviewQuote from './Components/OverviewQuote'
 
 function App() {
+  const [search, setSearch] = useState<string>("")
+
+  console.log(search)
+
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar />
+        <SearchBar input={setSearch} />
+        {search ? <OverviewQuote stock={search} /> : null}
       </header>
     </div>
   );
