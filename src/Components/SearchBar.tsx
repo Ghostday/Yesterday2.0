@@ -3,10 +3,10 @@ import { TextField, Autocomplete } from '@mui/material'
 import { APIKey } from '../api'
 
 type AppProps = {
-  input: string
+  searchFunc: Function
 }
 
-export default function SearchBar({input}: AppProps) {
+export default function SearchBar({searchFunc}: AppProps) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<any>([]);
   const [search, setSearch] = useState("");
@@ -69,6 +69,7 @@ export default function SearchBar({input}: AppProps) {
       }}
       onClose={() => {
         setOpen(false);
+        searchFunc(search);
       }}
       disableClearable
       onInputChange={(event: any, newValue: string) => {
