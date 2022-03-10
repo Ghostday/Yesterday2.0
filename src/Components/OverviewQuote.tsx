@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import { Paper } from '@mui/material';
 import { APIKey } from '../api';
 
-export default function OverviewQuote({stock}) {
+type AppProps = {
+    stock: string;
+}
+
+export default function OverviewQuote({stock}: AppProps){
     console.log("OverviewQuote: ", stock)
 
     const [details, setDetails] = useState<any>({})
@@ -22,7 +26,7 @@ export default function OverviewQuote({stock}) {
     return (
         <>
         {details ? 
-            <Paper variant='outlined' elevation={12} >
+            <Paper variant='outlined'>
             <h2>Change Amount: {details["09. change"]}</h2> 
             <h2>Change Percent: {details["10. change percent"]}</h2>
             </Paper>

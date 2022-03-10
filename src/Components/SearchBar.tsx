@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { TextField, Autocomplete } from '@mui/material'
 import { APIKey } from '../api'
 
-export default function SearchBar({input}) {
+type AppProps = {
+  input: string
+}
+
+export default function SearchBar({input}: AppProps) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<any>([]);
   const [search, setSearch] = useState("");
@@ -37,7 +41,7 @@ export default function SearchBar({input}) {
     (async () => {
       if (active && search.length > 2) {
         // TODO: Need to add debounce here to prevent multi-fetching
-        // searchResults(search);
+        searchResults(search);
       }
       console.log(options)
     })();
@@ -65,7 +69,6 @@ export default function SearchBar({input}) {
       }}
       onClose={() => {
         setOpen(false);
-        input(search);
       }}
       disableClearable
       onInputChange={(event: any, newValue: string) => {
