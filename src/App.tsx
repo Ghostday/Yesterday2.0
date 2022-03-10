@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar input={setSearch} />
+        <SearchBar searchFunc={setSearch} />
         {search ? <OverviewQuote stock={search} /> : null}
       </header>
     </div>
