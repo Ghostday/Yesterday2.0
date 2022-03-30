@@ -6,7 +6,7 @@ type AppProps = {
     stock: string;
 }
 
-export default function OverviewQuote({stock}: AppProps){
+export default function OverviewQuote({stock}: AppProps): JSX.Element{
     console.log("OverviewQuote: ", stock)
 
     const [details, setDetails] = useState<any>({})
